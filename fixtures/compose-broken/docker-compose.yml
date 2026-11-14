@@ -1,0 +1,13 @@
+services:
+  api:
+    image: node:20
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_PASSWORD: example
+  proxy:
+    image: nginx:1.27
+    ports:
+      - "80:80"

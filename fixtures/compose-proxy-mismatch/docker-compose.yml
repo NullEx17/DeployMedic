@@ -1,0 +1,11 @@
+# Proxy publishes 8080 while the API listens on 3000 with no healthcheck —
+# useful for multi-service warning coverage (DeployMedic does not invent port graph analysis).
+services:
+  proxy:
+    image: nginx:1.27
+    ports:
+      - "8080:80"
+  api:
+    image: node:20
+    environment:
+      PORT: "3000"

@@ -1,0 +1,145 @@
+{
+  "version": "1.0.0",
+  "tool": "deploymedic",
+  "toolVersion": "0.1.0",
+  "generatedAt": "2026-11-14T23:44:36.457Z",
+  "target": {
+    "path": "fixtures/sample-healthy",
+    "url": null
+  },
+  "summary": {
+    "pass": 9,
+    "warning": 0,
+    "fail": 0,
+    "unknown": 0,
+    "total": 9
+  },
+  "findings": [
+    {
+      "id": "ENV-001",
+      "checkId": "env-example",
+      "severity": "pass",
+      "service": "environment",
+      "title": "Environment template present",
+      "description": "Found .env.example documenting expected variables.",
+      "evidence": ".env.example defines 2 key(s): PORT, DATABASE_URL",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#env-example"
+    },
+    {
+      "id": "ENV-002",
+      "checkId": "env-example",
+      "severity": "pass",
+      "service": "environment",
+      "title": "Local .env covers template keys",
+      "description": "Every key in the environment template is present in .env.",
+      "evidence": "Compared 2 template key(s) against .env — none missing.",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#env-example"
+    },
+    {
+      "id": "GIT-001",
+      "checkId": "gitignore",
+      "severity": "pass",
+      "service": "git",
+      "title": ".env files are ignored",
+      "description": "Gitignore rules ignore common secret env paths (root and nested rules applied).",
+      "evidence": "Ignored probes: .env, .env.local, .env.development, .env.production, .env.development.local, config/.env. Gitignore files: 1.",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#gitignore"
+    },
+    {
+      "id": "LCK-001",
+      "checkId": "lockfile",
+      "severity": "pass",
+      "service": "node",
+      "title": "Lockfile present",
+      "description": "A single package manager lockfile was found.",
+      "evidence": "Found package-lock.json",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#lockfile"
+    },
+    {
+      "id": "NOD-001",
+      "checkId": "node-version",
+      "severity": "pass",
+      "service": "node",
+      "title": "Node version pin found",
+      "description": "At least one Node version pin is present.",
+      "evidence": ".nvmrc=20; engines.node=>=20",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#node-version"
+    },
+    {
+      "id": "PKG-001",
+      "checkId": "package-json",
+      "severity": "pass",
+      "service": "node",
+      "title": "package.json present and parseable",
+      "description": "A valid package.json was found at the scan root.",
+      "evidence": "Parsed package.json (name: healthy-api).",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#package-json"
+    },
+    {
+      "id": "PKG-003",
+      "checkId": "package-json",
+      "severity": "pass",
+      "service": "node",
+      "title": "Deploy-oriented scripts present",
+      "description": "A \"start\" script is defined.",
+      "evidence": "start=yes, build=yes",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#package-json"
+    },
+    {
+      "id": "PKG-004",
+      "checkId": "package-json",
+      "severity": "pass",
+      "service": "node",
+      "title": "engines.node declared",
+      "description": "package.json declares a Node engine range.",
+      "evidence": "engines.node = >=20",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#package-json"
+    },
+    {
+      "id": "PRT-001",
+      "checkId": "port-config",
+      "severity": "pass",
+      "service": "runtime",
+      "title": "Listens via PORT environment variable",
+      "description": "Entry files reference PORT from the environment.",
+      "evidence": "Inspected: server.js",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#port-config"
+    }
+  ],
+  "meta": {
+    "incomplete": false,
+    "incompleteReasons": [],
+    "checksRun": [
+      "package-json",
+      "lockfile",
+      "node-version",
+      "gitignore",
+      "env-example",
+      "port-config"
+    ],
+    "checksSkipped": [
+      "dockerfile",
+      "compose",
+      "health-url"
+    ],
+    "durationMs": 38
+  }
+}

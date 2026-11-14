@@ -1,0 +1,33 @@
+export {
+  REPORT_VERSION,
+  TOOL_NAME,
+  SEVERITIES,
+  MAX_FINDINGS,
+  MAX_STRING,
+  MAX_ID_STRING,
+  MAX_META_LIST,
+  MAX_REPORT_JSON_BYTES,
+  SeveritySchema,
+  FindingSchema,
+  SummarySchema,
+  TargetSchema,
+  MetaSchema,
+  ScanReportSchema,
+  SEVERITY_ORDER,
+  summarizeFindings,
+  sortFindings,
+  type Severity,
+  type Finding,
+  type Summary,
+  type Target,
+  type Meta,
+  type ScanReport,
+} from "./schema.js";
+
+export {
+  validateScanReport,
+  parseScanReportJson,
+  type ValidationResult,
+  type ValidationSuccess,
+  type ValidationFailure,
+} from "./validate.js";

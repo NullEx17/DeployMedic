@@ -1,0 +1,12 @@
+services:
+  api:
+    image: node:20
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  worker:
+    image: node:20
+    healthcheck:
+      test: ["CMD", "true"]

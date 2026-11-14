@@ -1,0 +1,28 @@
+{
+  "dark": {
+    "background": "#0B0F14",
+    "surface": "#151C24",
+    "text": "#F5F7F8",
+    "muted": "#A2AFBA",
+    "border": "#2A3540",
+    "accent": "#14B8A6"
+  },
+  "light": {
+    "background": "#F5F7F8",
+    "surface": "#FFFFFF",
+    "text": "#0B0F14",
+    "muted": "#40505C",
+    "border": "#D9E1E5",
+    "accent": "#08776D"
+  },
+  "statusOnDark": {
+    "fail": "#FF8D89",
+    "warn": "#F7C875",
+    "passed": "#7CDDAD",
+    "unknown": "#A2AFBA"
+  },
+  "fonts": {
+    "sans": "Manrope",
+    "mono": "JetBrains Mono"
+  }
+}

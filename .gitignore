@@ -1,0 +1,23 @@
+node_modules
+dist
+.next
+.turbo
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+# Keep intentional fixture env files for scan demos
+!fixtures/**/.env
+!fixtures/**/.env.example
+coverage
+.vercel
+*.tsbuildinfo
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# Local scan leftovers (often contain absolute host paths)
+/report.json
+/*.tgz
+.pack-verify/

@@ -1,0 +1,11 @@
+{
+  "name": "healthy-api",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "echo build",
+    "start": "node server.js"
+  }
+}

@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run build:core
+      - run: npm run build:cli
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run lint -w @deploymedic/web
+      - run: npm run build:web
+      - name: Scan broken fixture (expect fail exit)
+        run: |
+          set +e
+          node packages/cli/dist/bin.js scan fixtures/sample-broken --output /tmp/scan.json --color never
+          code=$?
+          test "$code" -eq 1
+      - name: Scan healthy fixture (expect pass exit)
+        run: node packages/cli/dist/bin.js scan fixtures/sample-healthy --color never

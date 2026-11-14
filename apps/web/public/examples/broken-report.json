@@ -1,0 +1,219 @@
+{
+  "version": "1.0.0",
+  "tool": "deploymedic",
+  "toolVersion": "0.1.0",
+  "generatedAt": "2026-11-14T23:44:36.198Z",
+  "target": {
+    "path": "fixtures/sample-broken",
+    "url": null
+  },
+  "summary": {
+    "pass": 4,
+    "warning": 6,
+    "fail": 4,
+    "unknown": 1,
+    "total": 15
+  },
+  "findings": [
+    {
+      "id": "ENV-002",
+      "checkId": "env-example",
+      "severity": "fail",
+      "service": "environment",
+      "title": "Local .env missing keys from template",
+      "description": "Keys documented in the environment template are absent from the local .env.",
+      "evidence": "Missing keys: SESSION_SECRET",
+      "impact": "Processes that read these variables may crash or behave incorrectly at runtime.",
+      "remediation": "Add the missing keys to .env (and to your deploy host): SESSION_SECRET",
+      "docsPath": "/docs/checks#env-example"
+    },
+    {
+      "id": "GIT-001",
+      "checkId": "gitignore",
+      "severity": "fail",
+      "service": "git",
+      "title": ".env is not ignored",
+      "description": "Gitignore rules (including nested files and negation) do not ignore `.env`.",
+      "evidence": "Checked 1 gitignore file(s). Tracked secret probes: .env, .env.local, .env.development, .env.production, .env.development.local, config/.env.",
+      "impact": "API keys and credentials may enter git history and deploy artifacts.",
+      "remediation": "Add `.env` and `.env.*` to .gitignore (keep `.env.example` tracked with a negation if needed).",
+      "docsPath": "/docs/checks#gitignore"
+    },
+    {
+      "id": "LCK-001",
+      "checkId": "lockfile",
+      "severity": "fail",
+      "service": "node",
+      "title": "No lockfile found",
+      "description": "A Node project without a lockfile produces non-reproducible installs on deploy hosts.",
+      "evidence": "Checked for package-lock.json, pnpm-lock.yaml, yarn.lock, bun.lock, bun.lockb — none present.",
+      "impact": "Production dependency trees can diverge from local installs and break builds.",
+      "remediation": "Commit the lockfile for your package manager (npm, pnpm, yarn, or bun).",
+      "docsPath": "/docs/checks#lockfile"
+    },
+    {
+      "id": "PRT-001",
+      "checkId": "port-config",
+      "severity": "fail",
+      "service": "runtime",
+      "title": "Hardcoded listen port",
+      "description": "The process appears to bind a fixed port instead of reading PORT from the environment.",
+      "evidence": "server.js: listen(3000)",
+      "impact": "Hosts that inject PORT (Heroku, Render, many containers) will fail health checks or refuse to bind.",
+      "remediation": "Bind to `process.env.PORT` (or equivalent) and keep a local default only as fallback.",
+      "docsPath": "/docs/checks#port-config"
+    },
+    {
+      "id": "CMP-002",
+      "checkId": "compose",
+      "severity": "warning",
+      "service": "container",
+      "title": "Services missing healthcheck",
+      "description": "Some services do not declare a healthcheck. Depends_on conditions and load balancers may not wait for readiness.",
+      "evidence": "No healthcheck on: api, db",
+      "impact": "Dependent services may start against an unready upstream.",
+      "remediation": "Add a `healthcheck` block (or platform probe) for each long-running service that accepts traffic.",
+      "docsPath": "/docs/checks#compose"
+    },
+    {
+      "id": "DOC-002",
+      "checkId": "dockerfile",
+      "severity": "warning",
+      "service": "container",
+      "title": "No HEALTHCHECK instruction",
+      "description": "Without HEALTHCHECK (or an equivalent platform health probe), orchestrators may route traffic to an unhealthy container.",
+      "evidence": "Dockerfile contains no HEALTHCHECK instruction.",
+      "impact": "Failed processes can remain in rotation until a manual restart.",
+      "remediation": "Add a HEALTHCHECK that probes your app's readiness endpoint, or configure an equivalent probe on your host.",
+      "docsPath": "/docs/checks#dockerfile"
+    },
+    {
+      "id": "DOC-003",
+      "checkId": "dockerfile",
+      "severity": "warning",
+      "service": "container",
+      "title": "No non-root USER",
+      "description": "Running the process as root increases blast radius if the container is compromised.",
+      "evidence": "No USER instruction selecting a non-root user.",
+      "impact": "Privilege escalation risk inside the container namespace.",
+      "remediation": "Create a non-root user in the image and add `USER` before the final CMD/ENTRYPOINT.",
+      "docsPath": "/docs/checks#dockerfile"
+    },
+    {
+      "id": "NOD-001",
+      "checkId": "node-version",
+      "severity": "warning",
+      "service": "node",
+      "title": "No Node version pin",
+      "description": "No .nvmrc, .node-version, or engines.node was found to pin the runtime.",
+      "evidence": "Checked .nvmrc, .node-version, and engines.node — none set.",
+      "impact": "CI and hosts may use a different Node major than developers.",
+      "remediation": "Add an .nvmrc (or engines.node) matching the version you test against.",
+      "docsPath": "/docs/checks#node-version"
+    },
+    {
+      "id": "PKG-003",
+      "checkId": "package-json",
+      "severity": "warning",
+      "service": "node",
+      "title": "No start or build script",
+      "description": "Many platforms invoke npm start or npm run build. Neither script is defined.",
+      "evidence": "scripts keys: dev",
+      "impact": "Platforms that expect start/build may fail or fall back to unpredictable defaults.",
+      "remediation": "Add a \"start\" and/or \"build\" script appropriate for your runtime, or document the custom start command in your platform config.",
+      "docsPath": "/docs/checks#package-json"
+    },
+    {
+      "id": "PKG-004",
+      "checkId": "package-json",
+      "severity": "warning",
+      "service": "node",
+      "title": "engines.node not declared",
+      "description": "No engines.node field was found. Hosts may pick a Node version that does not match local development.",
+      "evidence": "package.json has no engines.node.",
+      "impact": "Subtle runtime mismatches between local and production Node versions.",
+      "remediation": "Add \"engines\": { \"node\": \">=20\" } (or your required range) and pin the same version in your host settings.",
+      "docsPath": "/docs/checks#package-json"
+    },
+    {
+      "id": "DOC-004",
+      "checkId": "dockerfile",
+      "severity": "unknown",
+      "service": "container",
+      "title": "No EXPOSE instruction",
+      "description": "EXPOSE is documentation for the published port. Its absence is not always a failure, but platforms may misconfigure port mapping.",
+      "evidence": "Dockerfile has no EXPOSE line.",
+      "impact": "Operators may guess the wrong container port.",
+      "remediation": "Add `EXPOSE <port>` matching the port your process listens on.",
+      "docsPath": "/docs/checks#dockerfile"
+    },
+    {
+      "id": "CMP-001",
+      "checkId": "compose",
+      "severity": "pass",
+      "service": "container",
+      "title": "Compose file parseable",
+      "description": "Found 2 service(s) in docker-compose.yml.",
+      "evidence": "Services: api, db",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#compose"
+    },
+    {
+      "id": "DOC-001",
+      "checkId": "dockerfile",
+      "severity": "pass",
+      "service": "container",
+      "title": "Dockerfile found",
+      "description": "Inspected Dockerfile for common deployment pitfalls.",
+      "evidence": "Dockerfile: 6 instruction lines.",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#dockerfile"
+    },
+    {
+      "id": "ENV-001",
+      "checkId": "env-example",
+      "severity": "pass",
+      "service": "environment",
+      "title": "Environment template present",
+      "description": "Found .env.example documenting expected variables.",
+      "evidence": ".env.example defines 3 key(s): PORT, DATABASE_URL, SESSION_SECRET",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#env-example"
+    },
+    {
+      "id": "PKG-001",
+      "checkId": "package-json",
+      "severity": "pass",
+      "service": "node",
+      "title": "package.json present and parseable",
+      "description": "A valid package.json was found at the scan root.",
+      "evidence": "Parsed package.json (name: shop-api).",
+      "impact": "None.",
+      "remediation": "No action required.",
+      "docsPath": "/docs/checks#package-json"
+    }
+  ],
+  "meta": {
+    "incomplete": true,
+    "incompleteReasons": [
+      "One or more findings have severity unknown — evidence was insufficient for a definitive pass/fail."
+    ],
+    "checksRun": [
+      "package-json",
+      "lockfile",
+      "node-version",
+      "gitignore",
+      "env-example",
+      "dockerfile",
+      "compose",
+      "port-config"
+    ],
+    "checksSkipped": [
+      "health-url"
+    ],
+    "durationMs": 31
+  }
+}

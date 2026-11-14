@@ -1,0 +1,43 @@
+{
+  "name": "deploymedic",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Evidence-first deployment diagnostics — CLI, report viewer, and docs.",
+  "author": "NullEx17",
+  "homepage": "https://nullex17.me/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NullEx17/DeployMedic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NullEx17/DeployMedic/issues"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @deploymedic/core && npm run build -w @deploymedic/cli && npm run build -w @deploymedic/web",
+    "build:core": "npm run build -w @deploymedic/core",
+    "build:cli": "npm run build -w @deploymedic/cli",
+    "build:web": "npm run build -w @deploymedic/web",
+    "dev": "npm run dev -w @deploymedic/web",
+    "dev:cli": "npm run dev -w @deploymedic/cli",
+    "lint": "npm run lint -w @deploymedic/web && npm run lint -w @deploymedic/cli && npm run lint -w @deploymedic/core",
+    "typecheck": "npm run typecheck -w @deploymedic/core && npm run typecheck -w @deploymedic/cli && npm run typecheck -w @deploymedic/web",
+    "test": "npm run test -w @deploymedic/core && npm run test -w @deploymedic/cli",
+    "sync-fixtures": "node scripts/sync-fixtures.mjs",
+    "verify-pack": "node scripts/verify-pack.mjs",
+    "deploymedic": "node packages/cli/dist/bin.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT",
+  "overrides": {
+    "postcss": "8.5.33"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

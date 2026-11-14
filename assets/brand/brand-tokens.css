@@ -1,0 +1,27 @@
+/* DeployMedic brand tokens */
+:root, [data-theme="dark"] {
+  --dm-background: #0B0F14;
+  --dm-surface: #151C24;
+  --dm-text: #F5F7F8;
+  --dm-muted: #A2AFBA;
+  --dm-border: #2A3540;
+  --dm-accent: #14B8A6;
+  --dm-font-sans: "Manrope", system-ui, sans-serif;
+  --dm-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+[data-theme="light"] {
+  --dm-background: #F5F7F8;
+  --dm-surface: #FFFFFF;
+  --dm-text: #0B0F14;
+  --dm-muted: #40505C;
+  --dm-border: #D9E1E5;
+  --dm-accent: #08776D;
+}
+
+/* Use these status colors on a dark surface with a text label. */
+[data-theme="dark"], :root:not([data-theme="light"]) {
+  --dm-status-fail: #FF8D89;
+  --dm-status-warn: #F7C875;
+  --dm-status-passed: #7CDDAD;
+  --dm-status-unknown: #A2AFBA;
+}

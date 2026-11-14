@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  DeployMedic design tokens — aligned with assets/brand/brand-tokens.css
+  Accent: clinical teal. Severity colors are reserved for status only.
+*/
+
+:root {
+  /* Surfaces (light) */
+  --bg: #f5f7f8;
+  --bg-elevated: #ffffff;
+  --bg-muted: #eef2f4;
+  --bg-subtle: #e4eaee;
+  --border: #d9e1e5;
+  --border-strong: #a2afba;
+  --ring: #08776d;
+
+  /* Text */
+  --fg: #0b0f14;
+  --fg-muted: #40505c;
+  --fg-faint: #6b7a86;
+  --fg-invert: #f5f7f8;
+
+  /* Accent */
+  --accent: #08776d;
+  --accent-fg: #f0fdfa;
+  --accent-soft: color-mix(in oklab, var(--accent) 12%, transparent);
+
+  /* Severity — darker for light surfaces */
+  --sev-fail: #d94a45;
+  --sev-fail-soft: color-mix(in oklab, var(--sev-fail) 12%, transparent);
+  --sev-warning: #c9922a;
+  --sev-warning-soft: color-mix(in oklab, var(--sev-warning) 14%, transparent);
+  --sev-pass: #2f9a6e;
+  --sev-pass-soft: color-mix(in oklab, var(--sev-pass) 12%, transparent);
+  --sev-unknown: #40505c;
+  --sev-unknown-soft: color-mix(in oklab, var(--sev-unknown) 12%, transparent);
+
+  /* Type */
+  --font-sans: var(--font-manrope), "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Space scale (4px base) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Radii — tight, technical */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 120ms;
+  --duration-med: 220ms;
+
+  /* Layout */
+  --page-max: 1120px;
+  --prose-max: 68ch;
+}
+
+.dark {
+  /* Surfaces (dark) — brand kit */
+  --bg: #0b0f14;
+  --bg-elevated: #151c24;
+  --bg-muted: #121820;
+  --bg-subtle: #1a222c;
+  --border: #2a3540;
+  --border-strong: #3d4b5a;
+  --ring: #14b8a6;
+
+  --fg: #f5f7f8;
+  --fg-muted: #a2afba;
+  --fg-faint: #6b7a86;
+  --fg-invert: #0b0f14;
+
+  --accent: #14b8a6;
+  --accent-fg: #042f2e;
+  --accent-soft: color-mix(in oklab, var(--accent) 14%, transparent);
+
+  /* Severity — brand kit status-on-dark */
+  --sev-fail: #ff8d89;
+  --sev-fail-soft: color-mix(in oklab, var(--sev-fail) 14%, transparent);
+  --sev-warning: #f7c875;
+  --sev-warning-soft: color-mix(in oklab, var(--sev-warning) 14%, transparent);
+  --sev-pass: #7cddad;
+  --sev-pass-soft: color-mix(in oklab, var(--sev-pass) 12%, transparent);
+  --sev-unknown: #a2afba;
+  --sev-unknown-soft: color-mix(in oklab, var(--sev-unknown) 12%, transparent);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-muted: var(--bg-muted);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-faint: var(--fg-faint);
+  --color-fg-invert: var(--fg-invert);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-sev-fail: var(--sev-fail);
+  --color-sev-fail-soft: var(--sev-fail-soft);
+  --color-sev-warning: var(--sev-warning);
+  --color-sev-warning-soft: var(--sev-warning-soft);
+  --color-sev-pass: var(--sev-pass);
+  --color-sev-pass-soft: var(--sev-pass-soft);
+  --color-sev-unknown: var(--sev-unknown);
+  --color-sev-unknown-soft: var(--sev-unknown-soft);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01" on, "cv11" on;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  code,
+  kbd,
+  pre,
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility patterns */
+.dm-grid-bg {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--border) 55%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 35%, transparent 75%);
+}
+
+.dm-rule {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+}
+
+@keyframes dm-caret {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.dm-caret::after {
+  content: "▋";
+  margin-left: 2px;
+  color: var(--accent);
+  animation: dm-caret 1.1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-caret::after {
+    animation: none;
+    opacity: 1;
+  }
+}
