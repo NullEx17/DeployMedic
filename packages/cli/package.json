@@ -16,7 +16,7 @@
     "dev": "tsx src/bin.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "tsc -p tsconfig.json --noEmit",
-    "test": "npm run build && node --import tsx --test src/**/*.test.ts"
+    "test": "npm run build && node ../../scripts/run-package-tests.mjs src"
   },
   "dependencies": {
     "@deploymedic/core": "0.1.0",
