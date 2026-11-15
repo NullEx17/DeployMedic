@@ -13,6 +13,7 @@ const NAV = [
   { href: "/viewer", label: "Report viewer" },
   { href: "/docs", label: "Docs" },
   { href: "/docs/checks", label: "Checks" },
+  { href: "/about", label: "About" },
 ];
 
 export function SiteHeader() {

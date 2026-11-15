@@ -3,8 +3,22 @@ import Link from "next/link";
 import { InstallCommand, SetupCommands } from "@/components/install-command";
 
 export const metadata: Metadata = {
-  title: "Documentation",
-  description: "Install DeployMedic, run scans, and read reports locally.",
+  title: "Documentation — install, scan, and review reports",
+  description:
+    "Install DeployMedic, run local deployment scans, emit JSON reports, and review findings offline. CLI setup, quick start, and security model.",
+  keywords: [
+    "DeployMedic docs",
+    "deployment diagnostics install",
+    "deploymedic scan",
+    "local CLI deployment checker",
+  ],
+  alternates: { canonical: "/docs" },
+  openGraph: {
+    title: "DeployMedic documentation",
+    description:
+      "Install DeployMedic, run scans, and read reports locally without uploading project data.",
+    url: "/docs",
+  },
 };
 
 export default function DocsPage() {

@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CLI reference",
+  title: "CLI reference — scan, report, and checks commands",
+  description:
+    "DeployMedic CLI reference: deploymedic scan, report, and checks. Flags for JSON output, URL probes, check filters, color modes, and exit codes.",
+  keywords: [
+    "deploymedic scan",
+    "deploymedic CLI",
+    "deployment scan command",
+    "NO_COLOR",
+    "JSON deployment report",
+  ],
+  alternates: { canonical: "/docs/cli" },
+  openGraph: {
+    title: "DeployMedic CLI reference",
+    description:
+      "Commands, flags, exit codes, and terminal formatting for the DeployMedic CLI.",
+    url: "/docs/cli",
+  },
 };
 
 export default function CliDocsPage() {

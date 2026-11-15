@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, FileJson2, ShieldCheck, Terminal } from "lucide-react";
 import { BrandLogo } from "@/components/brand-logo";
@@ -5,6 +6,27 @@ import { InstallCommand, SetupCommands } from "@/components/install-command";
 import { TerminalDemo } from "@/components/terminal-demo";
 import { ExampleReportPreview } from "@/components/example-report-preview";
 import { checksCatalog } from "@/lib/checks-catalog";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TAGLINE,
+  absoluteUrl,
+} from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: `${SITE_NAME} — ${SITE_TAGLINE}`,
+  },
+  description: SITE_DESCRIPTION,
+  keywords: [...SITE_KEYWORDS],
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description: SITE_DESCRIPTION,
+    url: absoluteUrl("/"),
+  },
+};
 
 export default function HomePage() {
   return (
@@ -20,8 +42,9 @@ export default function HomePage() {
               Diagnose broken deployments with evidence.
             </h1>
             <p className="mt-5 max-w-[42ch] text-base leading-relaxed text-fg-muted sm:text-lg">
-              A local CLI that scans your project for real deploy pitfalls, writes a
-              structured JSON report, and a browser viewer that never uploads it.
+              Local-first deployment diagnostics for Docker, Node.js, env files,
+              and Compose. Scan on your machine, get a structured JSON report, and
+              review findings in a browser viewer that never uploads your data.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
@@ -227,6 +250,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-b border-border bg-bg-elevated">
+        <div className="mx-auto max-w-[var(--page-max)] px-4 py-14 sm:px-6">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg-faint">
+            About
+          </p>
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight">
+            Built for developers who need proof, not guesswork
+          </h2>
+          <p className="mt-3 max-w-[65ch] text-sm leading-relaxed text-fg-muted">
+            DeployMedic is an open-source, local-first deployment diagnostic tool.
+            It catches common ship-breakers — missing lockfiles, unsafe{" "}
+            <code className="font-mono text-fg">.env</code> gitignore gaps,
+            Dockerfile and Compose readiness gaps, and hardcoded ports — then
+            explains each finding with evidence and remediation.
+          </p>
+          <Link
+            href="/about"
+            className="mt-5 inline-flex h-9 items-center gap-2 text-sm font-medium text-accent hover:underline"
+          >
+            More about DeployMedic
+            <ArrowRight size={14} aria-hidden />
+          </Link>
+        </div>
+      </section>
+
       <section>
         <div className="mx-auto max-w-[var(--page-max)] px-4 py-16 sm:px-6">
           <h2 className="text-2xl font-semibold tracking-tight">
@@ -248,6 +296,12 @@ export default function HomePage() {
               className="inline-flex h-9 items-center rounded-[var(--radius-md)] border border-border bg-bg-elevated px-3.5 text-sm font-medium hover:bg-bg-muted"
             >
               Report viewer
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex h-9 items-center px-2 text-sm text-fg-muted hover:text-fg"
+            >
+              About
             </Link>
           </div>
         </div>

@@ -46,6 +46,9 @@ export function SiteFooter() {
             <Link href="/docs/cli" className="text-fg-muted hover:text-fg">
               CLI reference
             </Link>
+            <Link href="/about" className="text-fg-muted hover:text-fg">
+              About
+            </Link>
           </div>
           <div className="flex flex-col gap-2">
             <span className="font-mono text-[11px] uppercase tracking-wide text-fg-faint">

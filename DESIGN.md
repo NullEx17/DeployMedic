@@ -33,6 +33,7 @@ Logo mark: open **D**, three slashes, and medical cross — from the teal-cross 
 | Surface | Purpose |
 | --- | --- |
 | `/` | Product landing: brand, value prop, live terminal demo, install, example report, how it works, checks & limits |
+| `/about` | Product thesis, local-first trust model, maintainer — SEO/about surface |
 | `/viewer` | Local JSON import and diagnostic report UI |
 | `/docs` | Installation, CLI reference, report format, checks, security model |
 | `/docs/cli` | Commands, flags, exit codes, NO_COLOR |

@@ -2,7 +2,25 @@ import type { Metadata } from "next";
 import { checksCatalog } from "@/lib/checks-catalog";
 
 export const metadata: Metadata = {
-  title: "Checks",
+  title: "Supported checks — Docker, Node, env, Compose",
+  description:
+    "Catalog of DeployMedic deployment checks: package.json, lockfile, node version, gitignore, env.example, Dockerfile, Compose, port config, and optional URL probes.",
+  keywords: [
+    "Dockerfile HEALTHCHECK check",
+    "Docker Compose healthcheck",
+    "missing lockfile detection",
+    "env.example validation",
+    ".env gitignore check",
+    "Node engines.node",
+    "deployment static analysis",
+  ],
+  alternates: { canonical: "/docs/checks" },
+  openGraph: {
+    title: "DeployMedic supported checks",
+    description:
+      "What each DeployMedic check inspects — and what it cannot see.",
+    url: "/docs/checks",
+  },
 };
 
 const DETAILS: Record<

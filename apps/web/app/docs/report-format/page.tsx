@@ -1,7 +1,22 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Report format",
+  title: "Report format — DeployMedic JSON schema",
+  description:
+    "DeployMedic versioned JSON report format: findings, severity, evidence, remediation, summary counts, and scan metadata used by the CLI and offline viewer.",
+  keywords: [
+    "DeployMedic JSON report",
+    "deployment findings schema",
+    "scan report format",
+    "severity fail warning pass",
+  ],
+  alternates: { canonical: "/docs/report-format" },
+  openGraph: {
+    title: "DeployMedic report format",
+    description:
+      "Versioned JSON schema for DeployMedic scan findings, evidence, and remediation.",
+    url: "/docs/report-format",
+  },
 };
 
 export default function ReportFormatPage() {
